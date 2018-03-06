@@ -2,19 +2,18 @@
 import java.util.LinkedList;
 import java.util.Scanner;
 
-public class ContactDetails2 {
+public class ContactDetails{
 	
 	
-	 String name,email,address;
-	 long mobileNumber;
+	 String name,email,address, mobileNumber;
 	
-	LinkedList<PojoContactDetails> details=new LinkedList<PojoContactDetails>();
+	LinkedList<Contact> details=new LinkedList<Contact>();
 	
 	Scanner input=new Scanner(System.in);
 	
 	public static void main(String args[])
 	{
-		ContactDetails2 object=new ContactDetails2();
+		ContactDetails object=new ContactDetails();
 		
 		Scanner input2=new Scanner(System.in);
 		
@@ -51,19 +50,26 @@ public class ContactDetails2 {
 		}
 	}
 	
-	public ContactDetails2 addContact()
+	public ContactDetails addContact()
 	{
-		  try
-		  {
+		 
 			 System.out.println("Enter your name");
-	         name=input.next();
+			 name=input.next(); 
 	         System.out.println("Enter your email");
 	         email=input.next();  
 	         System.out.println("Enter your address");
 	         address=input.next();
 	         System.out.println("Enter your Mobile number");
-	         mobileNumber=input.nextLong();   
-	         details.add(new PojoContactDetails(name,email,address,mobileNumber));
+	        mobileNumber=input.nextLine(); 
+	        
+	        while (true) {
+	        	 mobileNumber = input.nextLine();
+	        	 	if (!mobileNumber.matches("[0-9]{10}"))
+	        	 			System.out.println("Please enter a valid 10 digit phone number");
+	        	 	else
+	        	 		break;
+	        	 			}	 
+	         details.add(new Contact(name,email,address,mobileNumber));
 	         System.out.println("Successfully inserted your details are:");
 	         System.out.println(name+" "+email+" "+address+" "+mobileNumber); 
 	         System.out.println("Would you like to add another details");
@@ -71,20 +77,16 @@ public class ContactDetails2 {
 	         String addDetailsChoice=input.next();
 	         if(addDetailsChoice.equals("yes"))
 	          addContact();
-		  }
-		  catch(Exception e)
-		    {
-			  e.printStackTrace(); 
-		    }
+		  
 		return null;   
 	}
-	public ContactDetails2 showContact()
+	public ContactDetails showContact()
 	{
 		try
 		{
 		if(!details.isEmpty())
 		{
-		for(PojoContactDetails show:details)
+		for(Contact show:details)
 			System.out.println(show.getName()+"  "+show.getEmail()+"  "+show.getMobileNumber()+"  "+show.getAddress());
 			System.out.println("would you like to go to Menu");
 			System.out.println("Enter y for yes n for No"); 
@@ -105,19 +107,19 @@ public class ContactDetails2 {
 		    }
 		return null;
 	}
-	public ContactDetails2 update()
+	public ContactDetails update()
 	{
 		try
 		{
 		if(!details.isEmpty())
 		{
 		 System.out.println("Avaliable contact details are:"); 
-		 for(PojoContactDetails show:details)
+		 for(Contact show:details)
 		System.out.println(show.getName()+"  "+show.getEmail()+"  "+show.getMobileNumber()+"  "+show.getAddress());
 		 System.out.println("Please Enter the name for which details you want to update");
 		 String update=input.next();
 		 boolean found=false;
-		 for(PojoContactDetails show:details)
+		 for(Contact show:details)
 		 {
 			 if(show.getName().contains(update)) 
 			 {
@@ -141,7 +143,14 @@ public class ContactDetails2 {
 				  else if(choice==3)
 				  {
 					  System.out.println("Enter the mobile number");
-					  show.setMobileNumber(input.nextLong());
+					  show.setMobileNumber(input.nextLine());
+					  while (true) {
+				        	 mobileNumber = input.nextLine();
+				        	 	if (!mobileNumber.matches("[0-9]{10}"))
+				        	 			System.out.println("Please enter a valid 10 digit phone number");
+				        	 	else
+				        	 		break;
+				        	 			}	 
 				  }
 				  else if(choice==4)
 				  {
@@ -176,7 +185,7 @@ public class ContactDetails2 {
 		    }
 		return null;
 	}
-	public ContactDetails2 search()
+	public ContactDetails search()
 	{
 		try
 		{
@@ -187,7 +196,7 @@ public class ContactDetails2 {
 		    int length=searchContactDetails.length();
 		    char[] charSearchContactDetails=searchContactDetails.toCharArray();
 		    boolean found=false;
-		    for(PojoContactDetails search:details)
+		    for(Contact search:details)
 		    {
 		    	char[] name=search.name.toCharArray();
 		    	for(int i=0;i<length;i++)
@@ -223,26 +232,26 @@ public class ContactDetails2 {
 		    }
 		return null; 
 	}
-	public ContactDetails2 delete() 
+	public ContactDetails delete() 
 	{
 		try
 		{
 		if(!details.isEmpty())
 		{
 		 System.out.println("Avaliable contact details are:"); 
-		 for(PojoContactDetails show:details)
+		 for(Contact show:details)
 			 System.out.println(show.getName()+"  "+show.getEmail()+"  "+show.getMobileNumber()+"  "+show.getAddress());
 		 System.out.println("Enter the name for delete the details");
 		 String deleteContactDetails=input.next();
 		
-		 for(PojoContactDetails delete:details)
+		 for(Contact delete:details)
 		 {
 			 if(delete.getName().contains(deleteContactDetails))
 			 {  
 				 int index=details.indexOf(delete);   
 				 details.remove(index);
 				 System.out.println("Remaining contact details are:");
-				 for(PojoContactDetails show:details)
+				 for(Contact show:details)
 						System.out.println(show.name+"  "+show.email+"  "+show.mobileNumber+"  "+show.address);
 			 }
 		 }

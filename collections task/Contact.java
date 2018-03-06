@@ -1,17 +1,16 @@
 
 
-public class PojoContactDetails {
+public class Contact{
 	//Declaring variables for storing the details
-		 String name,email,address;
-		 long mobileNumber;
+		 String name,email,address,mobileNumber;
 		 //Constructor 
-		 PojoContactDetails(String name,String email,String address,long mobileNumber)
+		 Contact(String name,String email,String address,String mobileNumber)
 			{
 			this.name=name;
 			this.email=email;
 			this.address=address;
 			this.mobileNumber=mobileNumber;   
-			}
+			} 
 		public String getName() {
 			return name;
 		}
@@ -36,11 +35,11 @@ public class PojoContactDetails {
 			this.address = address;
 		}
 
-		public long getMobileNumber() {
+		public String getMobileNumber() {
 			return mobileNumber;
 		}
 
-		public void setMobileNumber(long mobileNumber) {
+		public void setMobileNumber(String mobileNumber) { 
 			this.mobileNumber = mobileNumber;
 		}
 		 
