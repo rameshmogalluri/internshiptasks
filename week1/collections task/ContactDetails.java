@@ -29,39 +29,44 @@ public class ContactDetails{
 		  System.out.println("Enter your choice from 1 to 6");
 		  
 		  //Storing user choice
-		  int choice=input2.nextInt();
+		  String choice=input2.next();
+		  
+		  while (true) {
+			  
+	        	 	if (!choice.matches("[0-9]"))     
+	        	 	{
+	        	 			System.out.println("Please enter a valid number");
+	        	 	       choice = input2.next();
+	        	 	}
+	        	 	else
+	        	 		break;
+	        	 			}	
 		  
 		  //switch for going to required choice function
 		  switch(choice)
 		   {
-		   case 1:object.addContact(); 
+		   case "1":object.addContact(); 
 	         break;
-	       case 2:object.showContact();
+	       case "2":object.showContact();
 	         break;
-	       case 3:object.update();
+	       case "3":object.update();
 	         break;
-	       case 4:object.search();
+	       case "4":object.search();
 	         break;
-	       case 5:object.delete();
+	       case "5":object.delete();
 	          break;
-	       case 6:System.exit(0);  
+	       case "6":System.exit(0);  
 	        default:System.out.println("Invalid choice");    
 		    }
 		}
+		
 	}
 	
 	public ContactDetails addContact()
 	{
-		 
 			 System.out.println("Enter your name");
 			 name=input.next(); 
-			 while (true) {
-	        	 name = input.nextLine();
-	        	 	if (!name.matches("[a-z][a-zA-Z]*"))       
-	        	 			System.out.println("Please enter a valid name");
-	        	 	else
-	        	 		break;
-	        	 			}	
+			
 	         System.out.println("Enter your email");
 	         email=input.next();  
 	         while(true)
@@ -91,9 +96,9 @@ public class ContactDetails{
 	         System.out.println("Successfully inserted your details are:");
 	         System.out.println(name+" "+email+" "+address+" "+mobileNumber); 
 	         System.out.println("Would you like to add another details");
-	         System.out.println("Enter yes or no");
+	         System.out.println("Enter y for yes  no for n");
 	         String addDetailsChoice=input.next();
-	         if(addDetailsChoice.equals("yes"))
+	         if(addDetailsChoice.equals("y"))
 	          addContact();
 		  
 		return null;   
@@ -147,20 +152,23 @@ public class ContactDetails{
 				  System.out.println("3.Mobile number");
 				  System.out.println("4.Address");
 				  System.out.println("Select the which details you want to update");
-				  int choice=input.nextInt();
-				  if(choice==1)
-				  {
+				  String choice=input.next(); 
+				  while (true) {
+					  
+		        	 	if (!choice.matches("[0-9]"))     
+		        	 	{
+		        	 			System.out.println("Please enter a valid number");
+		        	 	       choice = input.next();
+		        	 	}
+		        	 	else
+		        	 		break;
+		        	 			}	
+				  if(choice.equals("1"))
+				  { 
 					  System.out.println("Enter the name");
 					  show.setName(input.next());
-					  while (true) { 
-				        	 name = input.nextLine();
-				        	 	if (!name.matches("[a-z][a-zA-Z]*"))       
-				        	 			System.out.println("Please enter a valid name");
-				        	 	else
-				        	 		break;
-				        	 			}
 				  }
-				  else if(choice==2)
+				  else if(choice.equals("2"))
 				  {
 					  System.out.println("Enter the email");
 					  show.setEmail(input.next());
@@ -176,7 +184,7 @@ public class ContactDetails{
 				        		 break;
 				         }
 				  }
-				  else if(choice==3)
+				  else if(choice.equals("3"))
 				  {
 					  System.out.println("Enter the mobile number");
 					  show.setMobileNumber(input.nextLine());
@@ -188,7 +196,7 @@ public class ContactDetails{
 				        	 		break;
 				        	 			}	 
 				  }
-				  else if(choice==4)
+				  else if(choice.equals("4"))
 				  {
 					  System.out.println("Enter the address");
 					  show.setAddress(input.next());  
